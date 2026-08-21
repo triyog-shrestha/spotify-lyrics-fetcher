@@ -1,59 +1,57 @@
-# Genius Lyrics Auto-Fetcher
+# Auto Lyrics Karaoke
 
-This script watches Spotify and automatically fetches lyrics from Genius for the currently playing track.
+This project watches Spotify, fetches synced lyrics from LRCLIB, and displays them in a karaoke-style terminal view with:
+
+- one previous line
+- one highlighted current line
+- one next line
+
+It is designed for the Linux desktop Spotify flow using `playerctl`.
 
 ## Requirements
 
-- Python 3.10 or newer
-- A Genius API token
-- Spotify Desktop running
+- Python 3.10+
+- Spotify desktop app running
+- `playerctl` installed
 - Internet access
 
-### Linux
-
-Install the Spotify metadata helper:
+### Install `playerctl`
 
 - Ubuntu/Debian: `sudo apt install playerctl`
 - Fedora: `sudo dnf install playerctl`
 - Arch: `sudo pacman -S playerctl`
 
-### macOS and Windows
-
-The current script uses `playerctl`, which is Linux-focused. It can still be run on other systems after adapting the Spotify detection part, but Linux is the recommended platform for full functionality.
-
 ## Setup
 
-1. Create and activate a virtual environment.
+1. Create a virtual environment:
 
-   Linux/macOS:
    ```bash
    python3 -m venv .venv
    source .venv/bin/activate
    ```
 
-   Windows PowerShell:
-   ```powershell
-   py -m venv .venv
-   .\.venv\Scripts\Activate.ps1
-   ```
+2. Install the required packages:
 
-2. Install the required Python packages:
    ```bash
-   pip install requests lyricsgenius
+   python -m pip install --upgrade pip
+   python -m pip install lrclibapi
    ```
 
-3. Put your own genius api 
-   ```
+3. Run the app:
 
-4. Run the script:
    ```bash
-   python genius.py
+   python main.py
    ```
 
-5. Press `Ctrl+C` to stop the script.
+4. Press `Ctrl+C` to stop it.
 
 ## Notes
 
-- The script checks Spotify every few seconds.
-- Lyrics are fetched when the track changes.
-- If Spotify is paused, closed, or no track is active, the script will print a message instead of lyrics.
+- The script polls Spotify every few seconds.
+- It matches the current playing track and fetches synced lyrics from LRCLIB.
+- The active lyric line is highlighted while the neighboring lines remain visible.
+- If Spotify is paused, closed, or no track is active, the app stops showing lyrics.
+
+## Current behavior
+
+This project does not use a Genius API token anymore. It uses the LRCLIB synced-lyrics service instead because it supports timestamped lyric lines that work much better for karaoke-style syncing.
