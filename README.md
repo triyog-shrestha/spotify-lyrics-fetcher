@@ -1,4 +1,4 @@
-# Auto Lyrics Karaoke
+# Spotify lyrics fetcher
 
 This project watches Spotify, fetches synced lyrics from LRCLIB, and displays them in a karaoke-style terminal view with:
 
